@@ -1,0 +1,6 @@
+[
+  { "caption": "Guard: Start Guard", "command": "start_guard" },
+  { "caption": "Guard: Stop Guard", "command": "stop_guard" },
+  { "caption": "Guard: Show Guard Output", "command": "show_guard" },
+  { "caption": "Guard: Hide Guard Output", "command": "hide_guard" }
+]
