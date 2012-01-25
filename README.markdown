@@ -9,7 +9,7 @@ This plugin basically makes it so that you don't have to leave your Sublime Text
 get the benefits that Guard normally provides, see the output of Guard as it runs tests, or
 control Guard as you would normally be able to.
 
-This plugin does NOT including any default key bindings. In fact I do not recommend that you
+This plugin does NOT include any default key bindings. In fact I do not recommend that you
 setup key bindings for this plugin. This plugin simply provides the following commands
 through the commands popup menu (Cmd+Shift+P):
 
@@ -23,7 +23,9 @@ through the commands popup menu (Cmd+Shift+P):
 * Pause (only available if Guard is running)
 * Output Help (only available if Guard is running, really useful for me while deving, not very useful to end users)
 
-## Install
+## Installation
+
+Installing this Sublime Text 2 plugin follows the same process you would use to install any other Sublime Text 2 plugin. Simply run the following commands:
 
     cd ~/Library/Application Support/Sublime Text 2/Packages/
     git clone git://github.com/cyphactor/sublime_guard.git Guard
@@ -40,7 +42,7 @@ command it will bring up a pane at the bottom of the screen and show you the out
 You can Hide and Show this output pane at any time using the "Hide Guard Output" and "Show Guard Output"
 commands.
 
-Beyond that above the "Run all Tests", "Reload Guard", and "Pause" commands are a few of my favorite. The
+Beyond the above the "Run all Tests", "Reload Guard", and "Pause" commands are a few of my favorite. The
 "Run all Tests" command will simply request that Guard run all of the tests. The "Reload Guard" command
 is useful if you have changed some Rails config initializers or something that requires reloading. The
 "Pause" command is primarily useful when you are going checkout a different branch, rebase, etc. It will
