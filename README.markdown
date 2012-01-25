@@ -35,7 +35,7 @@ through the commands popup menu (Cmd+Shift+P):
 
 Installing this Sublime Text 2 plugin follows the same process you would use to install any other Sublime Text 2 plugin. Simply run the following commands:
 
-    cd "~/Library/Application Support/Sublime Text 2/Packages/"
+    cd ~/Library/Application\ Support/Sublime\ Text\ 2/Packages/
     git clone git://github.com/cyphactor/sublime_guard.git Guard
 
 ## Usage
