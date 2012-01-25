@@ -54,4 +54,4 @@ As with all of my Open Source Projects I am open to contributions. There are num
 below is are just a few.
 
 1. **Contribute Code/Documentation** - If you would like to contribute code or documentation changes please fork the repository and submit a pull request.
-2. **Feature Requests/Bug Reports** - If you would like to contribute by submitting either a feature requst or a bug report you may do so via the [Issues](http://github.com/cyphactor/sublime_guard/issues) tab.
+2. **Feature Requests/Bug Reports** - If you would like to contribute by submitting either a feature request or a bug report you may do so via the [Issues](http://github.com/cyphactor/sublime_guard/issues) tab.
