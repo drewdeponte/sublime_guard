@@ -42,7 +42,8 @@ class GuardController(object):
         if (project_root_path == None):
             sublime.error_message("Failed to find Guardfile and Gemfile in any of the open folders.")
         else:
-            cmd = "cd " + project_root_path + " && bundle exec guard"
+            package_path = sublime.packages_path()
+            cmd = "\"" + package_path + "/Guard/run_guard.sh\" \"" + project_root_path + "\""
             self.proc = subprocess.Popen([cmd], shell=True, stdin=subprocess.PIPE, stdout=subprocess.PIPE, stderr=subprocess.PIPE)
             self.running = True
             self.show_guard_view()
