@@ -16,7 +16,6 @@ class GuardController(object):
         self.running = False
         self.listener = listener
         self.output_view = self.listener.window.get_output_panel('guard')
-        self.color_regex = re.compile("\\033\[[0-9;m]*", re.UNICODE)
 
     def open_file_paths(self):
         return [view.file_name() for view in self.listener.window.views() if view.file_name()]
@@ -76,18 +75,39 @@ class GuardController(object):
 
     def append_data(self, data):
         clean_data = data.decode("utf-8")
-        clean_data = clean_data.replace('\r\n', '\n').replace('\r', '\n')
-        clean_data = self.color_regex.sub("", clean_data)
+        clean_data = self.normalize_line_endings(clean_data)
+        clean_data = self.remove_terminal_color_codes(clean_data)
 
+        # Handle hard wrapping at 80 characters
+        # (_, col) = self.output_view.rowcol(self.output_view.size())
+        # clean_data_len = len(clean_data)
+        # if (col + clean_data_len > 80):
+        #     ins_pos = 80 - col
+        #     clean_data_list = list(clean_data)
+        #     clean_data_list.insert(ins_pos, '\n')
+        #     clean_data = "".join(clean_data_list)
+
+        # actually append the data
         self.output_view.set_read_only(False)
         edit = self.output_view.begin_edit()
         self.output_view.insert(edit, self.output_view.size(), clean_data)
 
         # scroll to the end of the new insert
-        self.output_view.show(self.output_view.size())
+        self.scroll_to_end_of_guard_view()
 
         self.output_view.end_edit(edit)
         self.output_view.set_read_only(True)
+
+    def normalize_line_endings(self, data):
+        return data.replace('\r\n', '\n').replace('\r', '\n')
+
+    def remove_terminal_color_codes(self, data):
+        color_regex = re.compile("\\033\[[0-9;m]*", re.UNICODE)
+        return color_regex.sub("", data)
+
+    def scroll_to_end_of_guard_view(self):
+        (cur_row, _) = self.output_view.rowcol(self.output_view.size())
+        self.output_view.show(self.output_view.text_point(cur_row, 0))
 
     def show_guard_view(self):
         self.listener.window.run_command('show_panel', {'panel': 'output.guard'})
