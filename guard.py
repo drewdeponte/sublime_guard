@@ -78,15 +78,6 @@ class GuardController(object):
         clean_data = self.normalize_line_endings(clean_data)
         clean_data = self.remove_terminal_color_codes(clean_data)
 
-        # Handle hard wrapping at 80 characters
-        # (_, col) = self.output_view.rowcol(self.output_view.size())
-        # clean_data_len = len(clean_data)
-        # if (col + clean_data_len > 80):
-        #     ins_pos = 80 - col
-        #     clean_data_list = list(clean_data)
-        #     clean_data_list.insert(ins_pos, '\n')
-        #     clean_data = "".join(clean_data_list)
-
         # actually append the data
         self.output_view.set_read_only(False)
         edit = self.output_view.begin_edit()
