@@ -38,6 +38,13 @@ Installing this Sublime Text 2 plugin follows the same process you would use to 
     cd ~/Library/Application\ Support/Sublime\ Text\ 2/Packages/
     git clone git://github.com/cyphactor/sublime_guard.git Guard
 
+## Upgrade
+
+If you have already installed this plugin to upgrade to the latest version you should simply have to run the following commands:
+
+    cd ~/Library/Application\ Support/Sublime\ Text\ 2/Packages/Guard
+    git pull
+
 ## Usage
 
 ### Commands Popup Menu
