@@ -4,6 +4,7 @@ import thread
 import subprocess
 import os
 import functools
+import re
 
 
 sublime_guard_controller = None
@@ -15,6 +16,7 @@ class GuardController(object):
         self.running = False
         self.listener = listener
         self.output_view = self.listener.window.get_output_panel('guard')
+        self.color_regex = re.compile("\\033\[[0-9;m]*", re.UNICODE)
 
     def open_file_paths(self):
         return [view.file_name() for view in self.listener.window.views() if view.file_name()]
@@ -75,6 +77,7 @@ class GuardController(object):
     def append_data(self, data):
         clean_data = data.decode("utf-8")
         clean_data = clean_data.replace('\r\n', '\n').replace('\r', '\n')
+        clean_data = self.color_regex.sub("", clean_data)
 
         self.output_view.set_read_only(False)
         edit = self.output_view.begin_edit()
