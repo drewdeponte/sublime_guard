@@ -2,16 +2,18 @@ Sublime Text 2 Guard Plugin
 ===========================
 
 This project provides integration of Guard into the Sublime Text 2 editor. I wrote this as
-a quick fun project to help improved my daily workflow while deving on numerous projects
+a convenience tool to help improve my daily workflow while deving on numerous projects
 using BDD and TDD.
 
-This plugin basically makes it so that you don't have to leave your Sublime Text 2 editor to
-get the benefits that Guard normally provides, see the output of Guard as it runs tests, or
-control Guard as you would normally be able to.
+This plugin provides an interface for controlling Guard and viewing Guards output within the
+Sublime Text 2 editor. Not having to switch between a terminal and an editor to see Red/Green
+states improves workflow drastically.
 
-This plugin does NOT include any default key bindings. In fact I do not recommend that you
-setup key bindings for this plugin. This plugin simply provides the following commands
-through the commands popup menu (Cmd+Shift+P):
+
+All of the commands are available via the command palette (**super+shift+p**).
+
+When performing some normal operations in Sublime Text 2, like search,  it hides the Guard output.
+Therefore, this plugin provides a default key binding (**super+shift+c**) to show or reshow the Guard output.
 
 * Commands available when Guard is NOT running
 
@@ -20,7 +22,7 @@ through the commands popup menu (Cmd+Shift+P):
 * Commands available all of the time
 
     * Hide Guard Output
-    * Show Guard Output
+    * Show Guard Output (**super+shift+c**)
 
 * Commands available when Guard IS running
 
@@ -28,53 +30,86 @@ through the commands popup menu (Cmd+Shift+P):
     * Run all Tests
     * Reload Guard
     * Toggle Notifications
-    * Pause
+    * Pause/Unpause
     * Output Help
 
 ## Installation
 
-Installing this Sublime Text 2 plugin follows the same process you would use to install any other Sublime Text 2 plugin. Simply run the following commands:
+To install this Sublime Text 2 plugin, simply run the following commands:
 
     cd ~/Library/Application\ Support/Sublime\ Text\ 2/Packages/
     git clone git://github.com/cyphactor/sublime_guard.git Guard
 
 ## Upgrade
 
-If you have already installed this plugin to upgrade to the latest version you should simply have to run the following commands:
+To upgrade to the latest version, simply run the following commands:
 
     cd ~/Library/Application\ Support/Sublime\ Text\ 2/Packages/Guard
     git pull
 
 ## Usage
 
-### Commands Popup Menu
+### Command Palette
 
-As mentioned above the standard way of using this plugin is via the commands popup menu (**Cmd+Shift+P**).
-Once the commands popup menu is up and you fuzzy match the command you want to run simply select it or
-press the return key with it highlighted.
+As mentioned above the primary way of using this plugin is via the command palette (**super+shift+p**).
+Once the command palette is up, fuzzy match the intendend command, and press the return key.
 
 ### Starting Guard
 
-If Guard is not currently running you probably want to "Start Guard" first. When you run the "Start Guard"
-command it will bring up a pane at the bottom of the screen and show you the output of Guard as it runs.
+If Guard is not currently running, start Guard using the "Start Guard" command. It will bring up a pane at
+the bottom of the screen and show the output of Guard as it runs.
 
 ### Show/Hide Guard Output
 
-You can Hide and Show this output pane at any time using the "Hide Guard Output" and "Show Guard Output"
-commands.
+The Guard output can be shown and hidden using the "Show Guard Output" and "Hide Guard Output" command respectively.
+The "Show Guard Output" command is also available via the default key binding (**super+shift+c**).
 
 ### Other Useful Commands
 
-Beyond the above the "Run all Tests", "Reload Guard", and "Pause" commands are a few of my favorite. The
+A few of my favorites commands are "Run all Tests", "Reload Guard", and "Pause/Unpause". The
 "Run all Tests" command will simply request that Guard run all of the tests. The "Reload Guard" command
-is useful if you have changed some Rails config initializers or something that requires reloading. The
-"Pause" command is primarily useful when you are going checkout a different branch, rebase, etc. It will
-prevent Guard from running all kinds of tests as things are in the process of changing.
+is useful if changes have been made to Rails config initializers or something else that requires reloading. The
+"Pause/Unpause" command is primarily useful when switching branches or rebasing. It will
+temporarily prevent Guard from monitoring the project files for changes.
+
+## RVM Support
+
+This plugin supports RVM out of the box. Basically, it means that it first checks to see if RVM is installed and loads it.
+Once RVM is loaded it then looks to see if any of the top level folders in Sublime Text 2 contain a project specific .rvmrc. If one does it will
+load that .rvmrc and attempt to run Guard on that project.
+
+In the case where it can't find RVM it simply tries to run Guard assuming it is installed as a system gem.
+
+## FAQs
+
+#### Does the Guard process die/exit when Sublime Text 2 dies/exits?
+
+Yes.
+
+#### Why would I get "Failed to find Guardfile and Gemfile in any of the open folders." as an error?
+
+This error message is a result of the project currently loaded in Sublime Text 2 missing either the Guardfile, the Gemfile, or both.
+Currently, this plugin requires a Guardfile and a Gemfile to be present in the projects root path to run Guard.
+
+#### Where do I find out about Guardfiles?
+
+The best place to find out about Guardfiles is the [Guard project page](http://github.com/guard/guard).
+
+#### Where do I found out about Gemfiles?
+
+The best place to find out about Gemfiles is the [Bundler project](http://gembundler.com/).
+
+#### What do I do if I find a bug?
+
+Please report all bugs/issues via the [Issues](http://github.com/cyphactor/sublime_guard/issues) tab.
+
+#### What do I do if I have an idea for a feature/change?
+
+All feature requests or change requests should be made via the [Issues](http://github.com/cyphactor/sublime_guard/issues) tab.
 
 ## Contributions
 
-As with all of my Open Source Projects I am open to contributions. There are numerous ways one can contribute
-below is are just a few.
+As with all of my Open Source Projects I am open to contributions. There are numerous ways one can contribute.
 
 1. **Contribute Code/Documentation** - If you would like to contribute code or documentation changes please fork the repository and submit a pull request.
 2. **Feature Requests/Bug Reports** - If you would like to contribute by submitting either a feature request or a bug report you may do so via the [Issues](http://github.com/cyphactor/sublime_guard/issues) tab.

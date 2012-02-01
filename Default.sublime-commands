@@ -7,5 +7,5 @@
   { "caption": "Guard: Output Help", "command": "output_help_guard" },
   { "caption": "Guard: Reload Guard", "command": "run_all_tests_guard" },
   { "caption": "Guard: Toggle Notifications", "command": "toggle_notifications_guard" },
-  { "caption": "Guard: Pause", "command": "pause_guard" }
+  { "caption": "Guard: Pause/Unpause", "command": "pause_guard" }
 ]
