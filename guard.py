@@ -6,7 +6,6 @@ import os
 import functools
 import re
 
-
 sublime_guard_controller = None
 
 
@@ -16,6 +15,7 @@ class GuardController(object):
         self.running = False
         self.listener = listener
         self.output_view = self.listener.window.get_output_panel('guard')
+        self.enable_word_wrap()
 
     def open_file_paths(self):
         return [view.file_name() for view in self.listener.window.views() if view.file_name()]
@@ -38,14 +38,17 @@ class GuardController(object):
                 break
         return project_root_path
 
+    def enable_word_wrap(self):
+        self.output_view.settings().set("word_wrap", True)
+
     def start_guard(self):
         project_root_path = self.find_project_root_path()
         if (project_root_path == None):
             sublime.error_message("Failed to find Guardfile and Gemfile in any of the open folders.")
         else:
             package_path = sublime.packages_path()
-            cmd = "\"" + package_path + "/Guard/run_guard.sh\" \"" + project_root_path + "\""
-            self.proc = subprocess.Popen([cmd], shell=True, stdin=subprocess.PIPE, stdout=subprocess.PIPE, stderr=subprocess.PIPE)
+            cmd_array = [package_path + "/Guard/guard_wrapper", package_path + "/Guard/run_guard.sh", project_root_path]
+            self.proc = subprocess.Popen(cmd_array, stdin=subprocess.PIPE, stdout=subprocess.PIPE, stderr=subprocess.PIPE)
             self.running = True
             self.show_guard_view()
             if self.proc.stdout:
@@ -108,6 +111,7 @@ class GuardController(object):
 
     def stop_guard(self):
         self.proc.stdin.write('e\n')
+        self.proc.stdin.flush()
         self.running = False
 
     def is_guard_running(self):
@@ -115,18 +119,23 @@ class GuardController(object):
 
     def reload_guard(self):
         self.proc.stdin.write('r\n')
+        self.proc.stdin.flush()
 
     def run_all_tests(self):
         self.proc.stdin.write('\n')
+        self.proc.stdin.flush()
 
     def output_help(self):
         self.proc.stdin.write('h\n')
+        self.proc.stdin.flush()
 
     def toggle_notifications(self):
         self.proc.stdin.write('n\n')
+        self.proc.stdin.flush()
 
     def pause(self):
         self.proc.stdin.write('p\n')
+        self.proc.stdin.flush()
 
 
 def GuardControllerSingleton(listener):

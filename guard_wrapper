@@ -1,0 +1,74 @@
+#!/usr/bin/env python
+
+import sys
+import os
+import subprocess
+import threading
+
+
+class GuardWrapper:
+    def __init__(self):
+        self.running = False
+        self.proc = None
+        self.stdout_thread = None
+        self.stderr_thread = None
+        self.log = open('/tmp/guard_wrapper.log', 'w')
+
+    def run_cmd(self, cmd_array):
+        self.proc = subprocess.Popen(cmd_array, stdin=subprocess.PIPE, stdout=subprocess.PIPE, stderr=subprocess.PIPE)
+        self.running = True
+        if self.proc.stdout:
+            self.stdout_thread = threading.Thread(target=self.read_stdout, args=())
+            self.stdout_thread.start()
+        if self.proc.stderr:
+            self.stderr_thread = threading.Thread(target=self.read_stderr, args=())
+            self.stderr_thread.start()
+        while True:
+            self.log.write("read stdin iteration\n")
+            self.log.flush()
+            data = sys.stdin.readline()
+            if data != "":
+                self.log.write("Received: " + data + "\n")
+                self.log.flush()
+                if data == "e\n":
+                    self.proc.stdin.write(data)
+                    self.proc.stdin.flush()
+                    break
+                else:
+                    self.proc.stdin.write(data)
+                    self.proc.stdin.flush()
+            else:
+                self.log.write("got empty string, :-(\n")
+                self.log.flush()
+                self.proc.stdin.write("e\n")
+                self.proc.stdin.flush()
+                self.proc.stdin.close()
+                break
+        self.stdout_thread.join()
+        self.stderr_thread.join()
+
+    def read_stdout(self):
+        while True:
+            data = os.read(self.proc.stdout.fileno(), 2 ** 15)
+            if data != "":
+                sys.stdout.write(data)
+                sys.stdout.flush()
+            else:
+                self.proc.stdout.close()
+                self.running = False
+                break
+
+    def read_stderr(self):
+        while True:
+            data = os.read(self.proc.stderr.fileno(), 2 ** 15)
+            if data != "":
+                sys.stderr.write(data)
+                sys.stderr.flush()
+            else:
+                self.proc.stderr.close()
+                self.running = False
+                break
+
+
+wrap = GuardWrapper()
+wrap.run_cmd(sys.argv[1:])
