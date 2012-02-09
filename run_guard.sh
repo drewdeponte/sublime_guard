@@ -1,4 +1,4 @@
-#!/bin/sh
+#!/bin/bash
 
 # Normally I would have the set -e here but rvm when loaded as function isn't compatible with set -e
 #set -e
