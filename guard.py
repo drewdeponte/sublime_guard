@@ -83,6 +83,7 @@ class GuardController(object):
                 break
 
     def append_data(self, data):
+        self.show_guard_view()
         clean_data = data.decode("utf-8")
         clean_data = self.normalize_line_endings(clean_data)
         clean_data = self.remove_terminal_color_codes(clean_data)
