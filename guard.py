@@ -3,6 +3,7 @@ import sublime_plugin
 import thread
 import subprocess
 import os
+import stat
 import functools
 import re
 
@@ -41,12 +42,17 @@ class GuardController(object):
     def enable_word_wrap(self):
         self.output_view.settings().set("word_wrap", True)
 
+    def set_permissions(self, path):
+        os.chmod(path, stat.S_IRWXU | stat.S_IXGRP | stat.S_IRGRP | stat.S_IXOTH | stat.S_IROTH)
+
     def start_guard(self):
         project_root_path = self.find_project_root_path()
         if (project_root_path == None):
             sublime.error_message("Failed to find Guardfile and Gemfile in any of the open folders.")
         else:
             package_path = sublime.packages_path()
+            self.set_permissions(package_path + "/Guard/guard_wrapper")
+            self.set_permissions(package_path + "/Guard/run_guard.sh")
             cmd_array = [package_path + "/Guard/guard_wrapper", package_path + "/Guard/run_guard.sh", project_root_path]
             self.proc = subprocess.Popen(cmd_array, stdin=subprocess.PIPE, stdout=subprocess.PIPE, stderr=subprocess.PIPE)
             self.running = True
