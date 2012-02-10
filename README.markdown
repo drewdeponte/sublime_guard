@@ -12,8 +12,10 @@ states improves workflow drastically.
 
 All of the commands are available via the command palette (**super+shift+p**).
 
-When performing some normal operations in Sublime Text 2, like search,  it hides the Guard output.
+When performing some operations in Sublime Text 2, like search,  it hides the Guard output.
 Therefore, this plugin provides a default key binding (**super+shift+c**) to show or reshow the Guard output.
+It also has an **auto show** feature that shows or reshows the Guard output automatically when any new content
+comes in from the Guard process.
 
 * Commands available when Guard is NOT running
 
@@ -33,14 +35,29 @@ Therefore, this plugin provides a default key binding (**super+shift+c**) to sho
     * Pause/Unpause
     * Output Help
 
-## Installation
+## Package Control Installation
+
+This plugin is available via [Sublime Package Control](http://wbond.net/sublime_packages/package_control).
+To install using the [Sublime Package Control](http://wbond.net/sublime_packages/package_control) perform the following steps:
+
+1. Open the Command Palette using **super+shift+p** and select `Package Control: Install Package`
+2. Select `Guard` from the popup menu and press **return**
+3. Wait for the status bar in the lower left conrner to notify you the install is complete.
+
+## Package Control Upgrade
+
+If installed via [Sublime Package Control](http://wbond.net/sublime_packages/package_control). The plugin will be upgraded to
+the latest version automatically at Sublime Text 2 startup. Therefore, if you want to force an upgrade of the plugins simply
+Quit Sublime Text 2 and start it up again.
+
+## Manual Installation
 
 To install this Sublime Text 2 plugin, simply run the following commands:
 
     cd ~/Library/Application\ Support/Sublime\ Text\ 2/Packages/
     git clone git://github.com/cyphactor/sublime_guard.git Guard
 
-## Upgrade
+## Manual Upgrade
 
 To upgrade to the latest version, simply run the following commands:
 
