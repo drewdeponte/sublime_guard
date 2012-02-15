@@ -23,8 +23,8 @@ comes in from the Guard process.
 
 * Commands available all of the time
 
-    * Hide Guard Output
-    * Show Guard Output (**super+shift+c**)
+    * Hide Guard Output (**disable auto show**)
+    * Show Guard Output (**enable auto show**) (**super+shift+c**)
 
 * Commands available when Guard IS running
 
