@@ -14,6 +14,7 @@ class GuardController(object):
     def __init__(self, listener):
         self.proc = None
         self.running = False
+        self.auto_show_enabled = True
         self.listener = listener
         self.output_view = self.listener.window.get_output_panel('guard')
         self.enable_word_wrap()
@@ -41,6 +42,12 @@ class GuardController(object):
 
     def enable_word_wrap(self):
         self.output_view.settings().set("word_wrap", True)
+
+    def enable_auto_show(self):
+        self.auto_show_enabled = True
+
+    def disable_auto_show(self):
+        self.auto_show_enabled = False
 
     def set_permissions(self, path):
         os.chmod(path, stat.S_IRWXU | stat.S_IXGRP | stat.S_IRGRP | stat.S_IXOTH | stat.S_IROTH)
@@ -83,7 +90,8 @@ class GuardController(object):
                 break
 
     def append_data(self, data):
-        self.show_guard_view()
+        if (self.auto_show_enabled):
+            self.show_guard_view()
         clean_data = data.decode("utf-8")
         clean_data = self.normalize_line_endings(clean_data)
         clean_data = self.remove_terminal_color_codes(clean_data)
@@ -111,9 +119,11 @@ class GuardController(object):
         self.output_view.show(self.output_view.text_point(cur_row, 0))
 
     def show_guard_view(self):
+        self.enable_auto_show()
         self.listener.window.run_command('show_panel', {'panel': 'output.guard'})
 
     def hide_guard_view(self):
+        self.disable_auto_show()
         self.listener.window.run_command('hide_panel', {'panel': 'output.guard'})
 
     def stop_guard(self):
