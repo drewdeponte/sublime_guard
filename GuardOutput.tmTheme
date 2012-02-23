@@ -1,0 +1,76 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>comment</key>
+	<string>Guard Output Theme</string>
+	<key>name</key>
+	<string>GuardOutput</string>
+	<key>settings</key>
+	<array>
+		<dict>
+			<key>settings</key>
+			<dict>
+				<key>background</key>
+				<string>#FFFFFF</string>
+				<key>caret</key>
+				<string>#000000</string>
+				<key>foreground</key>
+				<string>#000000</string>
+				<key>invisibles</key>
+				<string>#BFBFBF</string>
+				<key>lineHighlight</key>
+				<string>#00000012</string>
+				<key>selection</key>
+				<string>#A7C9FF</string>
+			</dict>
+		</dict>
+		<dict>
+			<key>name</key>
+			<string>test pass</string>
+			<key>scope</key>
+			<string>test.pass</string>
+			<key>settings</key>
+			<dict>
+				<key>foreground</key>
+				<string>#00C800</string>
+			</dict>
+		</dict>
+		<dict>
+			<key>name</key>
+			<string>test fail</string>
+			<key>scope</key>
+			<string>test.fail</string>
+			<key>settings</key>
+			<dict>
+				<key>foreground</key>
+				<string>#FF0000</string>
+			</dict>
+		</dict>
+		<dict>
+			<key>name</key>
+			<string>test comment</string>
+			<key>scope</key>
+			<string>test.comment</string>
+			<key>settings</key>
+			<dict>
+				<key>foreground</key>
+				<string>#919191</string>
+			</dict>
+		</dict>
+		<dict>
+			<key>name</key>
+			<string>test referance</string>
+			<key>scope</key>
+			<string>test.reference</string>
+			<key>settings</key>
+			<dict>
+				<key>foreground</key>
+				<string>#0000FF</string>
+			</dict>
+		</dict>
+	</array>
+	<key>uuid</key>
+	<string>19907EAE-885C-46C2-BB53-08DD1BDD9AFC</string>
+</dict>
+</plist>

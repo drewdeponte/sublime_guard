@@ -18,6 +18,7 @@ class GuardController(object):
         self.listener = listener
         self.output_view = self.listener.window.get_output_panel('guard')
         self.enable_word_wrap()
+        self.set_color_scheme()
 
     def open_file_paths(self):
         return [view.file_name() for view in self.listener.window.views() if view.file_name()]
@@ -42,6 +43,10 @@ class GuardController(object):
 
     def enable_word_wrap(self):
         self.output_view.settings().set("word_wrap", True)
+
+    def set_color_scheme(self):
+        self.output_view.settings().set("syntax", "Packages/Guard/GuardOutput.tmLanguage")
+        self.output_view.settings().set("color_scheme", "Packages/Guard/GuardOutput.tmTheme")
 
     def enable_auto_show(self):
         self.auto_show_enabled = True
