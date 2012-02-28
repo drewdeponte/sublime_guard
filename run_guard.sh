@@ -31,7 +31,7 @@ function load_rvm_as_a_function() {
 
 function run_guard() {
   printf "Running 'bundle exec guard'. All output/failures from this point on is from the 'bundle exec guard' command.\n\n"
-  cd $1 && bundle exec guard
+  cd "$1" && bundle exec guard
 }
 
 echo "\n\nStarting Guard for $1"
@@ -40,21 +40,21 @@ load_rvm_as_a_function
 if [ $? -ne 0 ]; then # failed to load rvm
   printf "Couldn't find or load RVM.\n"
   printf "Attempting to run Guard using your system gemset.\n"
-  run_guard $1
+  run_guard "$1"
 else # successfully loaded rvm
   printf "Found and Successfully loaded RVM as a function.\n"
   if [ -e "$1/.rvmrc" ]; then # found project specific .rvmrc
     printf "Found an .rvmrc in the project directory. Trying to load it...\n"
    
-    cd $1
-    rvm rvmrc load $1
+    cd "$1"
+    rvm rvmrc load "$1"
     if [ $? -ne 0 ]; then # failed to load project specific .rvmrc
       printf "Failed to load the project .rvmrc\n"
       printf "\nWE DID NOT RUN GUARD AS LOADING YOUR PROJECT SPECIFIC .rvmrc SHOULD NOT HAVE FAILED\n"
       return 1
     else # successfully loaded project specific .rvmrc
       printf "Successfully loaded the project .rvmrc\n"
-      run_guard $1
+      run_guard "$1"
     fi
   else # failed to find project specific .rvmrc
     printf "Failed to find a project specific .rvmrc in $1.\n"
@@ -67,7 +67,7 @@ else # successfully loaded rvm
       return 1
     else # successfully switched to the users default gemset
       printf "Successfully switched to your default RVM environment.\n"
-      run_guard $1
+      run_guard "$1"
     fi
   fi
 fi
