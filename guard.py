@@ -11,14 +11,17 @@ sublime_guard_controller = None
 
 
 class GuardController(object):
-    def __init__(self, listener):
+    def __init__(self):
         self.proc = None
         self.running = False
         self.auto_show_enabled = True
+
+    def set_listener(self, listener):
         self.listener = listener
         self.output_view = self.listener.window.get_output_panel('guard')
         self.enable_word_wrap()
         self.set_color_scheme()
+        return self
 
     def open_file_paths(self):
         return [view.file_name() for view in self.listener.window.views() if view.file_name()]
@@ -160,10 +163,10 @@ class GuardController(object):
         self.proc.stdin.flush()
 
 
-def GuardControllerSingleton(listener):
+def GuardControllerSingleton():
     global sublime_guard_controller
     if sublime_guard_controller == None:
-        sublime_guard_controller = GuardController(listener)
+        sublime_guard_controller = GuardController()
         return sublime_guard_controller
     else:
         return sublime_guard_controller
@@ -172,25 +175,25 @@ def GuardControllerSingleton(listener):
 class StartGuardCommand(sublime_plugin.WindowCommand):
 
     def run(self):
-        GuardControllerSingleton(self).start_guard()
+        GuardControllerSingleton().set_listener(self).start_guard()
 
     def is_enabled(self):
-        return not GuardControllerSingleton(self).is_guard_running()
+        return not GuardControllerSingleton().is_guard_running()
 
 
 class StopGuardCommand(sublime_plugin.WindowCommand):
 
     def run(self):
-        GuardControllerSingleton(self).stop_guard()
+        GuardControllerSingleton().set_listener(self).stop_guard()
 
     def is_enabled(self):
-        return GuardControllerSingleton(self).is_guard_running()
+        return GuardControllerSingleton().is_guard_running()
 
 
 class HideGuardCommand(sublime_plugin.WindowCommand):
 
     def run(self):
-        GuardControllerSingleton(self).hide_guard_view()
+        GuardControllerSingleton().set_listener(self).hide_guard_view()
 
     def is_enabled(self):
         return True
@@ -199,7 +202,7 @@ class HideGuardCommand(sublime_plugin.WindowCommand):
 class ShowGuardCommand(sublime_plugin.WindowCommand):
 
     def run(self):
-        GuardControllerSingleton(self).show_guard_view()
+        GuardControllerSingleton().set_listener(self).show_guard_view()
 
     def is_enabled(self):
         return True
@@ -208,43 +211,43 @@ class ShowGuardCommand(sublime_plugin.WindowCommand):
 class ReloadGuardCommand(sublime_plugin.WindowCommand):
 
     def run(self):
-        GuardControllerSingleton(self).reload_guard()
+        GuardControllerSingleton().set_listener(self).reload_guard()
 
     def is_enabled(self):
-        return GuardControllerSingleton(self).is_guard_running()
+        return GuardControllerSingleton().is_guard_running()
 
 
 class RunAllTestsGuardCommand(sublime_plugin.WindowCommand):
 
     def run(self):
-        GuardControllerSingleton(self).run_all_tests()
+        GuardControllerSingleton().set_listener(self).run_all_tests()
 
     def is_enabled(self):
-        return GuardControllerSingleton(self).is_guard_running()
+        return GuardControllerSingleton().is_guard_running()
 
 
 class OutputHelpGuardCommand(sublime_plugin.WindowCommand):
 
     def run(self):
-        GuardControllerSingleton(self).output_help()
+        GuardControllerSingleton().set_listener(self).output_help()
 
     def is_enabled(self):
-        return GuardControllerSingleton(self).is_guard_running()
+        return GuardControllerSingleton().is_guard_running()
 
 
 class ToggleNotificationsGuardCommand(sublime_plugin.WindowCommand):
 
     def run(self):
-        GuardControllerSingleton(self).toggle_notifications()
+        GuardControllerSingleton().set_listener(self).toggle_notifications()
 
     def is_enabled(self):
-        return GuardControllerSingleton(self).is_guard_running()
+        return GuardControllerSingleton().is_guard_running()
 
 
 class PauseGuardCommand(sublime_plugin.WindowCommand):
 
     def run(self):
-        GuardControllerSingleton(self).pause()
+        GuardControllerSingleton().set_listener(self).pause()
 
     def is_enabled(self):
-        return GuardControllerSingleton(self).is_guard_running()
+        return GuardControllerSingleton().is_guard_running()
