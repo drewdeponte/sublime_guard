@@ -77,7 +77,7 @@
 		</dict>
 		<dict>
 			<key>begin</key>
-			<string>\s+\d+\)\s+[\w+:#\s]+</string>
+			<string>\s+\d+\)\s+[\w+:#\s\-\.]+</string>
 			<key>comment</key>
 			<string>failure tracebacks</string>
 			<key>contentName</key>
@@ -104,7 +104,7 @@
 					<key>comment</key>
 					<string>comment</string>
 					<key>match</key>
-					<string>[.#]*#\s+[.\w\/:#\s`\(\)&lt;&gt;]+</string>
+					<string>[.#]*#\s+[.\w\/:#\s`\(\)&lt;&gt;\-\?']+</string>
 					<key>name</key>
 					<string>test.comment.rspec_output</string>
 				</dict>
