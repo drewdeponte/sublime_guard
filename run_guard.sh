@@ -34,7 +34,7 @@ function run_guard() {
   cd "$1" && bundle exec guard
 }
 
-echo "\n\nStarting Guard for $1"
+echo "Starting Guard for $1"
 
 load_rvm_as_a_function
 if [ $? -ne 0 ]; then # failed to load rvm
