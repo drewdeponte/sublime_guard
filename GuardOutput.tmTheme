@@ -10,20 +10,20 @@
 	<array>
 		<dict>
 			<key>settings</key>
-			<dict>
-				<key>background</key>
-				<string>#FFFFFF</string>
-				<key>caret</key>
-				<string>#000000</string>
-				<key>foreground</key>
-				<string>#000000</string>
-				<key>invisibles</key>
-				<string>#BFBFBF</string>
-				<key>lineHighlight</key>
-				<string>#00000012</string>
-				<key>selection</key>
-				<string>#A7C9FF</string>
-			</dict>
+		     <dict>
+		       <key>background</key>
+		       <string>#000000</string>
+		       <key>caret</key>
+		       <string>#A7A7A7</string>
+		       <key>foreground</key>
+		       <string>#F8F8F8</string>
+		       <key>invisibles</key>
+		       <string>#CAE2FB3D</string>
+		       <key>lineHighlight</key>
+		       <string>#FFFFFF0D</string>
+		       <key>selection</key>
+		       <string>#DDF0FF33</string>
+		     </dict>
 		</dict>
 		<dict>
 			<key>name</key>
@@ -33,7 +33,7 @@
 			<key>settings</key>
 			<dict>
 				<key>foreground</key>
-				<string>#00C800</string>
+				<string>#00FF00</string>
 			</dict>
 		</dict>
 		<dict>
@@ -44,9 +44,20 @@
 			<key>settings</key>
 			<dict>
 				<key>foreground</key>
-				<string>#FF0000</string>
+				<string>#F00000</string>
 			</dict>
 		</dict>
+		<dict>
+	      <key>name</key>
+	      <string>Test</string>
+	      <key>scope</key>
+	      <string>test.cucumber</string>
+	      <key>settings</key>
+	      <dict>
+	        <key>foreground</key>
+	        <string>#FFcc66</string>
+	      </dict>
+	    </dict>
 		<dict>
 			<key>name</key>
 			<string>test comment</string>
@@ -55,7 +66,7 @@
 			<key>settings</key>
 			<dict>
 				<key>foreground</key>
-				<string>#919191</string>
+				<string>#545454</string>
 			</dict>
 		</dict>
 		<dict>
@@ -66,7 +77,7 @@
 			<key>settings</key>
 			<dict>
 				<key>foreground</key>
-				<string>#0000FF</string>
+				<string>#00CCFF</string>
 			</dict>
 		</dict>
 	</array>
