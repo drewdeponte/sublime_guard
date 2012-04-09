@@ -1,3 +1,5 @@
+#!/usr/bin/python2
+
 import sublime
 import sublime_plugin
 import thread
