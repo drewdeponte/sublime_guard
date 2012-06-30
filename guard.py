@@ -15,12 +15,14 @@ class GuardController(object):
         self.proc = None
         self.running = False
         self.auto_show_enabled = True
+        self.clear_when_find_this_text = None
 
     def set_listener(self, listener):
         self.listener = listener
         self.output_view = self.listener.window.get_output_panel('guard')
         self.enable_word_wrap()
         self.set_color_scheme()
+        self.load_config()
         return self
 
     def open_file_paths(self):
@@ -107,6 +109,11 @@ class GuardController(object):
         # actually append the data
         self.output_view.set_read_only(False)
         edit = self.output_view.begin_edit()
+        
+        # clear the output window when a predefined text is found.
+        if (self.clear_when_find_this_text and self.clear_when_find_this_text.search(clean_data)):
+            self.output_view.erase(edit, sublime.Region(0, self.output_view.size()))
+
         self.output_view.insert(edit, self.output_view.size(), clean_data)
 
         # scroll to the end of the new insert
@@ -162,6 +169,13 @@ class GuardController(object):
         self.proc.stdin.write('p\n')
         self.proc.stdin.flush()
 
+    def load_config(self):
+        s = sublime.load_settings("Guard.sublime-settings")
+        clear_text = s.get("clear_when_find_this_text")
+        if (clear_text):
+           self.clear_when_find_this_text = re.compile(clear_text)
+        else:
+           self.clear_when_find_this_text = None
 
 def GuardControllerSingleton():
     global sublime_guard_controller
