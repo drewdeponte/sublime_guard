@@ -32,14 +32,11 @@ class GuardController(object):
     def path_has_guardfile(self, path):
         return os.path.exists(path + '/Guardfile')
 
-    def path_has_gemfile(self, path):
-        return os.path.exists(path + '/Gemfile')
-
     def find_project_root_path(self):
         project_root_path = None
         for path in self.open_folder_paths():
             print "Checking ... " + path
-            if (self.path_has_guardfile(path) and self.path_has_gemfile(path)):
+            if (self.path_has_guardfile(path)):
                 project_root_path = path
                 break
         return project_root_path
@@ -63,7 +60,7 @@ class GuardController(object):
     def start_guard(self):
         project_root_path = self.find_project_root_path()
         if (project_root_path == None):
-            sublime.error_message("Failed to find Guardfile and Gemfile in any of the open folders.")
+            sublime.error_message("Failed to find Guardfile in any of the open folders.")
         else:
             package_path = sublime.packages_path()
             self.set_permissions(package_path + "/Guard/guard_wrapper")
