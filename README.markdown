@@ -30,6 +30,7 @@ comes in from the Guard process.
 
     * Stop Guard
     * Run all Tests
+    * Run all Tests & Show Guard Output (**does NOT enable auto show**) (**ctrl+shift+g**)
     * Reload Guard
     * Toggle Notifications
     * Pause/Unpause
@@ -81,6 +82,13 @@ the bottom of the screen and show the output of Guard as it runs.
 The Guard output can be shown and hidden using the "Show Guard Output" and "Hide Guard Output" command respectively.
 The "Show Guard Output" command is also available via the default key binding (**super+shift+c**).
 
+### Run all Tests & Show Guard Output
+
+Some users prefer a workflow in which the guard pane is hidden the majority of the time and it is just shown when they
+run all the tests. For those users we have the "Run all Tests & Show Guard Output" command. This command shows the guard
+output similar to the "Show Guard Output" command except this command does NOT enable auto show. This command is available
+as always via the command pallete, but also via the key binding (**ctrl+shift+g**).
+
 ### Other Useful Commands
 
 A few of my favorites commands are "Run all Tests", "Reload Guard", and "Pause/Unpause". The
@@ -96,6 +104,14 @@ Once RVM is loaded it then looks to see if any of the top level folders in Subli
 load that .rvmrc and attempt to run Guard on that project.
 
 In the case where it can't find RVM it simply tries to run Guard assuming it is installed as a system gem.
+
+## rbenv Support
+
+This plugin supports *rbenv* out of the box. This means it checks to see if `$HOME/.rbenv` exists and appropriately
+modifies the `PATH` environment variable to include `$HOME/.rbenv/bin` in the path. It also runs `rbenv init -` for
+you.
+
+In the case where it can't find *rbenv* it simply tries to run Guard assuming it is installed as a system gem.
 
 ## FAQs
 

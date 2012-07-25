@@ -70,7 +70,7 @@ class GuardController(object):
             cmd_array = [package_path + "/Guard/guard_wrapper", package_path + "/Guard/run_guard.sh", project_root_path]
             self.proc = subprocess.Popen(cmd_array, stdin=subprocess.PIPE, stdout=subprocess.PIPE, stderr=subprocess.PIPE)
             self.running = True
-            self.show_guard_view()
+            self.show_guard_view_and_enable_autoshow()
             if self.proc.stdout:
                 thread.start_new_thread(self.read_stdout, ())
             if self.proc.stderr:
@@ -130,8 +130,11 @@ class GuardController(object):
         (cur_row, _) = self.output_view.rowcol(self.output_view.size())
         self.output_view.show(self.output_view.text_point(cur_row, 0))
 
-    def show_guard_view(self):
+    def show_guard_view_and_enable_autoshow(self):
         self.enable_auto_show()
+        self.show_guard_view()
+
+    def show_guard_view(self):
         self.listener.window.run_command('show_panel', {'panel': 'output.guard'})
 
     def hide_guard_view(self):
@@ -153,10 +156,6 @@ class GuardController(object):
     def run_all_tests(self):
         self.proc.stdin.write('\n')
         self.proc.stdin.flush()
-
-    def run_tests_and_show_output(self):
-        self.listener.window.run_command('show_panel', {'panel': 'output.guard'})
-        self.run_all_tests()
 
     def output_help(self):
         self.proc.stdin.write('h\n')
@@ -217,7 +216,7 @@ class HideGuardCommand(sublime_plugin.WindowCommand):
 class ShowGuardCommand(sublime_plugin.WindowCommand):
 
     def run(self):
-        GuardControllerSingleton().set_listener(self).show_guard_view()
+        GuardControllerSingleton().set_listener(self).show_guard_view_and_enable_autoshow()
 
     def is_enabled(self):
         return True
@@ -241,10 +240,12 @@ class RunAllTestsGuardCommand(sublime_plugin.WindowCommand):
         return GuardControllerSingleton().is_guard_running()
 
 
-class RunTestsAndShowOutputGuardCommand(sublime_plugin.WindowCommand):
+class RunAllTestsAndShowGuardCommand(sublime_plugin.WindowCommand):
 
     def run(self):
-        GuardControllerSingleton().set_listener(self).run_tests_and_show_output()
+        GuardControllerSingleton().set_listener(self).show_guard_view()
+        GuardControllerSingleton().set_listener(self).run_all_tests()
+
 
     def is_enabled(self):
         return GuardControllerSingleton().is_guard_running()

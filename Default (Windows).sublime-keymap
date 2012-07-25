@@ -1,5 +1,4 @@
 [
-	{
-		"keys": ["super+shit+c"], "command": "go_to_spec"
-	}
+	{ "keys": ["super+shift+c"], "command": "show_guard" },
+	{ "keys": ["ctrl+shift+g"], "command": "run_all_tests_and_show_guard" }
 ]

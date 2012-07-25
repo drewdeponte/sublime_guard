@@ -4,6 +4,7 @@
   { "caption": "Guard: Show Guard Output", "command": "show_guard" },
   { "caption": "Guard: Hide Guard Output", "command": "hide_guard" },
   { "caption": "Guard: Run all Tests", "command": "run_all_tests_guard" },
+  { "caption": "Guard: Run all Tests & Show Guard Output", "command": "run_all_tests_and_show_guard" },
   { "caption": "Guard: Output Help", "command": "output_help_guard" },
   { "caption": "Guard: Reload Guard", "command": "run_all_tests_guard" },
   { "caption": "Guard: Toggle Notifications", "command": "toggle_notifications_guard" },

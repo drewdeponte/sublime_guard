@@ -1,4 +1,4 @@
 [
-	{ "keys": ["super+shfit+s"], "command": "gotospec" },
-	{ "keys": ["ctrl+shift+g"], "command": "run_tests_and_show_output_guard" }
+	{ "keys": ["super+shift+c"], "command": "show_guard" },
+	{ "keys": ["ctrl+shift+g"], "command": "run_all_tests_and_show_guard" }
 ]
