@@ -1,5 +1,4 @@
 [
-	{
-		"keys": ["super+shfit+s"], "command": "gotospec"
-	}
+	{ "keys": ["super+shfit+s"], "command": "gotospec" },
+	{ "keys": ["ctrl+shift+g"], "command": "run_tests_and_show_output_guard" }
 ]
