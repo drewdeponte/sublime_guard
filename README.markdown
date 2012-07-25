@@ -113,6 +113,25 @@ you.
 
 In the case where it can't find *rbenv* it simply tries to run Guard assuming it is installed as a system gem.
 
+## Clear Output when Matched String Found
+
+The user must create a json file called `Guard.sublime-settings` in the user
+config directory `Packages/User/`. This file has the following format:
+
+```json
+{
+  "clear_when_find_this_text": "Running: .*_spec.rb"
+}
+```
+
+Some suggested matches are as follows:
+
+* `Running: .*_spec.rb`
+* `Running: .*_spec.rb|Failures:`
+* `Running: .*_spec.rb|Failures:|Reloading Spork for RSpec`
+
+If you do NOT want to use this feature simply do not define the `clear_when_find_this_text` setting.
+
 ## FAQs
 
 #### Does the Guard process die/exit when Sublime Text 2 dies/exits?
