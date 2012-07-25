@@ -106,7 +106,7 @@ class GuardController(object):
         # actually append the data
         self.output_view.set_read_only(False)
         edit = self.output_view.begin_edit()
-        
+
         # clear the output window when a predefined text is found.
         if (self.clear_when_find_this_text and self.clear_when_find_this_text.search(clean_data)):
             self.output_view.erase(edit, sublime.Region(0, self.output_view.size()))
@@ -153,6 +153,10 @@ class GuardController(object):
     def run_all_tests(self):
         self.proc.stdin.write('\n')
         self.proc.stdin.flush()
+
+    def run_tests_and_show_output(self):
+        self.listener.window.run_command('show_panel', {'panel': 'output.guard'})
+        self.run_all_tests()
 
     def output_help(self):
         self.proc.stdin.write('h\n')
@@ -232,6 +236,15 @@ class RunAllTestsGuardCommand(sublime_plugin.WindowCommand):
 
     def run(self):
         GuardControllerSingleton().set_listener(self).run_all_tests()
+
+    def is_enabled(self):
+        return GuardControllerSingleton().is_guard_running()
+
+
+class RunTestsAndShowOutputGuardCommand(sublime_plugin.WindowCommand):
+
+    def run(self):
+        GuardControllerSingleton().set_listener(self).run_tests_and_show_output()
 
     def is_enabled(self):
         return GuardControllerSingleton().is_guard_running()
