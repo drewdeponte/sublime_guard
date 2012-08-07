@@ -1,4 +1,4 @@
-#!/usr/bin/env python
+#!/usr/local/bin/python3
 
 import sys
 import os
@@ -13,6 +13,12 @@ class GuardWrapper:
         self.stdout_thread = None
         self.stderr_thread = None
         self.log = open('/tmp/guard_wrapper.log', 'w')
+
+    def in_python_3(self):
+        if sys.version_info.major > 2:
+            return True
+        else:
+            return False
 
     def run_cmd(self, cmd_array):
         self.proc = subprocess.Popen(cmd_array, stdin=subprocess.PIPE, stdout=subprocess.PIPE, stderr=subprocess.PIPE)
@@ -31,16 +37,25 @@ class GuardWrapper:
                 self.log.write("Received: " + data + "\n")
                 self.log.flush()
                 if data == "e\n":
-                    self.proc.stdin.write(data)
+                    if self.in_python_3():
+                        self.proc.stdin.buffer.write(data)
+                    else:
+                        self.proc.stdin.write(data)
                     self.proc.stdin.flush()
                     break
                 else:
-                    self.proc.stdin.write(data)
+                    if self.in_python_3():
+                        self.proc.stdin.buffer.write(data)
+                    else:
+                        self.proc.stdin.write(data)
                     self.proc.stdin.flush()
             else:
                 self.log.write("got empty string, :-(\n")
                 self.log.flush()
-                self.proc.stdin.write("e\n")
+                if self.in_python_3():
+                    self.proc.stdin.buffer.write("e\n")
+                else:
+                    self.proc.stdin.write("e\n")
                 self.proc.stdin.flush()
                 self.proc.stdin.close()
                 break
@@ -51,7 +66,10 @@ class GuardWrapper:
         while True:
             data = os.read(self.proc.stdout.fileno(), 2 ** 15)
             if data != "":
-                sys.stdout.write(data)
+                if self.in_python_3():
+                    sys.stdout.buffer.write(data)
+                else:
+                    sys.stdout.write(data)
                 sys.stdout.flush()
             else:
                 self.proc.stdout.close()
@@ -62,7 +80,10 @@ class GuardWrapper:
         while True:
             data = os.read(self.proc.stderr.fileno(), 2 ** 15)
             if data != "":
-                sys.stderr.write(data)
+                if self.in_python_3():
+                    sys.stderr.buffer.write(data)
+                else:
+                    sys.stderr.write(data)
                 sys.stderr.flush()
             else:
                 self.proc.stderr.close()
