@@ -15,6 +15,11 @@ Running: spec/lib/sms_transport_spec.rb
 Running tests with args ["--color", "--failure-exit-code", "2", "--format", "progress", "--format", "Guard::RSpec::Formatter::NotificationRSpec", "--out", "/dev/null", "--require", "/Users/adeponte/.rvm/gems/ruby-1.9.3-p125@rpp_web_app/gems/guard-rspec-0.6.0/lib/guard/rspec/formatters/notification_rspec.rb", "spec/lib/sms_transport_spec.rb"]...
 .....F...............
 
+Pending:
+  NewContactMailer#notifier uses the partners lead_notification_sender setting as the from address
+    # Spork is causing issues with helpers included in mailers and their views, researching fixes
+	# ./spec/mailers/new_contact_mailer_spec.rb:5
+
 Failures:
 
   1) SmsTransport have an sms transport#send_sms_to_multiple_recipients' sends, the ?provided! sms.message to-each of the specified recipients
