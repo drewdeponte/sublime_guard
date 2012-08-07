@@ -104,7 +104,7 @@
 					<key>comment</key>
 					<string>comment</string>
 					<key>match</key>
-					<string>[.#]*#\s+[.\w\/:#\s`\(\)&lt;&gt;\-\?']+</string>
+					<string>[.#]*#\s+[.\w\/:#\s`\(\)&lt;&gt;\-\?'=,]+</string>
 					<key>name</key>
 					<string>test.comment.rspec_output</string>
 				</dict>
