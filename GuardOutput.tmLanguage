@@ -52,7 +52,7 @@
 			<key>comment</key>
 			<string>dots painting</string>
 			<key>end</key>
-			<string>Finished|Failures|Pending</string>
+			<string>Finished|Failures|Pending|Done|backtrace</string>
 			<key>patterns</key>
 			<array>
 				<dict>

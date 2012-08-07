@@ -49,3 +49,51 @@ rspec ./spec/lib/sms_transport_spec.rb:34 # SmsTransport have an sms transport#s
 rspec ./spec/lib/contact_notifier_spec.rb:61 # ContactNotfier#msg_options should set is_new_lead to false if is_new_lead => false is passed in options
 rspec ./spec/lib/contact_notifier_spec.rb:61 # ContactNotfier#msg_options should set sent_auto_response_message to true if it is a new lead, and the contact was sent an autoresponse message
 
+
+Running: spec/helpers/application_helper_spec.rb
+Done.
+
+Running tests with args ["--color", "--failure-exit-code", "2", "--format", "progress", "--format", "Guard::RSpec::Formatter::NotificationRSpec", "--out", "/dev/null", "--require", "/Users/rcloak/.rvm/gems/ruby-1.9.3-p125@rpp_web_app/gems/guard-rspec-0.6.0/lib/guard/rspec/formatters/notification_rspec.rb", "spec/helpers/application_helper_spec.rb"]...
+Exception encountered: #<NoMethodError: undefined method `t' for #<Class:0x007fdae2bff120>>
+backtrace:
+/Users/rcloak/WebApps/realpractice/rpp_web_app/spec/helpers/application_helper_spec.rb:99:in `block (2 levels) in <top (required)>'
+/Users/rcloak/.rvm/gems/ruby-1.9.3-p125@rpp_web_app/gems/rspec-core-2.8.0/lib/rspec/core/example_group.rb:201:in `module_eval'
+/Users/rcloak/.rvm/gems/ruby-1.9.3-p125@rpp_web_app/gems/rspec-core-2.8.0/lib/rspec/core/example_group.rb:201:in `subclass'
+/Users/rcloak/.rvm/gems/ruby-1.9.3-p125@rpp_web_app/gems/rspec-core-2.8.0/lib/rspec/core/example_group.rb:187:in `describe'
+/Users/rcloak/WebApps/realpractice/rpp_web_app/spec/helpers/application_helper_spec.rb:18:in `block in <top (required)>'
+/Users/rcloak/.rvm/gems/ruby-1.9.3-p125@rpp_web_app/gems/rspec-core-2.8.0/lib/rspec/core/example_group.rb:201:in `module_eval'
+/Users/rcloak/.rvm/gems/ruby-1.9.3-p125@rpp_web_app/gems/rspec-core-2.8.0/lib/rspec/core/example_group.rb:201:in `subclass'
+/Users/rcloak/.rvm/gems/ruby-1.9.3-p125@rpp_web_app/gems/rspec-core-2.8.0/lib/rspec/core/example_group.rb:187:in `describe'
+/Users/rcloak/.rvm/gems/ruby-1.9.3-p125@rpp_web_app/gems/rspec-core-2.8.0/lib/rspec/core/dsl.rb:18:in `describe'
+/Users/rcloak/WebApps/realpractice/rpp_web_app/spec/helpers/application_helper_spec.rb:3:in `<top (required)>'
+/Users/rcloak/.rvm/gems/ruby-1.9.3-p125@rpp_web_app/gems/activesupport-3.2.1/lib/active_support/dependencies.rb:245:in `load'
+/Users/rcloak/.rvm/gems/ruby-1.9.3-p125@rpp_web_app/gems/activesupport-3.2.1/lib/active_support/dependencies.rb:245:in `block in load'
+/Users/rcloak/.rvm/gems/ruby-1.9.3-p125@rpp_web_app/gems/activesupport-3.2.1/lib/active_support/dependencies.rb:236:in `load_dependency'
+/Users/rcloak/.rvm/gems/ruby-1.9.3-p125@rpp_web_app/gems/activesupport-3.2.1/lib/active_support/dependencies.rb:245:in `load'
+/Users/rcloak/.rvm/gems/ruby-1.9.3-p125@rpp_web_app/gems/rspec-core-2.8.0/lib/rspec/core/configuration.rb:698:in `block in load_spec_files'
+/Users/rcloak/.rvm/gems/ruby-1.9.3-p125@rpp_web_app/gems/rspec-core-2.8.0/lib/rspec/core/configuration.rb:698:in `map'
+/Users/rcloak/.rvm/gems/ruby-1.9.3-p125@rpp_web_app/gems/rspec-core-2.8.0/lib/rspec/core/configuration.rb:698:in `load_spec_files'
+/Users/rcloak/.rvm/gems/ruby-1.9.3-p125@rpp_web_app/gems/rspec-core-2.8.0/lib/rspec/core/command_line.rb:22:in `run'
+/Users/rcloak/.rvm/gems/ruby-1.9.3-p125@rpp_web_app/gems/rspec-core-2.8.0/lib/rspec/monkey/spork/test_framework/rspec.rb:7:in `run_tests'
+/Users/rcloak/.rvm/gems/ruby-1.9.3-p125@rpp_web_app/gems/spork-0.9.0/lib/spork/run_strategy/forking.rb:13:in `block in run'
+/Users/rcloak/.rvm/gems/ruby-1.9.3-p125@rpp_web_app/gems/spork-0.9.0/lib/spork/forker.rb:21:in `block in initialize'
+/Users/rcloak/.rvm/gems/ruby-1.9.3-p125@rpp_web_app/gems/spork-0.9.0/lib/spork/forker.rb:18:in `fork'
+/Users/rcloak/.rvm/gems/ruby-1.9.3-p125@rpp_web_app/gems/spork-0.9.0/lib/spork/forker.rb:18:in `initialize'
+/Users/rcloak/.rvm/gems/ruby-1.9.3-p125@rpp_web_app/gems/spork-0.9.0/lib/spork/run_strategy/forking.rb:9:in `new'
+/Users/rcloak/.rvm/gems/ruby-1.9.3-p125@rpp_web_app/gems/spork-0.9.0/lib/spork/run_strategy/forking.rb:9:in `run'
+/Users/rcloak/.rvm/gems/ruby-1.9.3-p125@rpp_web_app/gems/spork-0.9.0/lib/spork/server.rb:48:in `run'
+/Users/rcloak/.rvm/rubies/ruby-1.9.3-p125/lib/ruby/1.9.1/drb/drb.rb:1548:in `perform_without_block'
+/Users/rcloak/.rvm/rubies/ruby-1.9.3-p125/lib/ruby/1.9.1/drb/drb.rb:1508:in `perform'
+/Users/rcloak/.rvm/rubies/ruby-1.9.3-p125/lib/ruby/1.9.1/drb/drb.rb:1586:in `block (2 levels) in main_loop'
+/Users/rcloak/.rvm/rubies/ruby-1.9.3-p125/lib/ruby/1.9.1/drb/drb.rb:1582:in `loop'
+/Users/rcloak/.rvm/rubies/ruby-1.9.3-p125/lib/ruby/1.9.1/drb/drb.rb:1582:in `block in main_loop'
+
+Running: spec/helpers/application_helper_spec.rb
+Done.
+
+Running tests with args ["--color", "--failure-exit-code", "2", "--format", "progress", "--format", "Guard::RSpec::Formatter::NotificationRSpec", "--out", "/dev/null", "--require", "/Users/rcloak/.rvm/gems/ruby-1.9.3-p125@rpp_web_app/gems/guard-rspec-0.6.0/lib/guard/rspec/formatters/notification_rspec.rb", "spec/helpers/application_helper_spec.rb"]...
+.......
+
+Finished in 0.11964 seconds
+7 examples, 0 failures
+
