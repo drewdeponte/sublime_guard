@@ -1,0 +1,38 @@
+Starting Spork for RSpec
+Using RSpec
+Preloading Rails environment
+Loading Spork.prefork block...
+DEPRECATION WARNING: The InstanceMethods module inside ActiveSupport::Concern will be no longer included automatically. Please define instance methods directly in RSolr::Connection instead. (called from <top (required)> at /Users/adeponte/WebApps/realpractice/rpp_web_app/config/environment.rb:5)
+DEPRECATION WARNING: ActiveSupport::Memoizable is deprecated and will be removed in future releases,simply use Ruby memoization pattern instead. (called from <top (required)> at /Users/adeponte/WebApps/realpractice/rpp_web_app/config/environment.rb:5)
+/Users/adeponte/.rvm/gems/ruby-1.9.3-p125@rpp_web_app/gems/actionpack-3.2.1/lib/action_dispatch/http/mime_type.rb:101: warning: already initialized constant PDF
+/Users/adeponte/.rvm/gems/ruby-1.9.3-p125@rpp_web_app/gems/activesupport-3.2.1/lib/active_support/dependencies.rb:251:in `block in require': iconv will be deprecated in the future, use String#encode instead.
+Spork is ready and listening on 8989!
+
+Spork server for RSpec successfully started
+Guard::RSpec is running, with RSpec 2!
+
+Running: spec/lib/sms_transport_spec.rb
+Running tests with args ["--color", "--failure-exit-code", "2", "--format", "progress", "--format", "Guard::RSpec::Formatter::NotificationRSpec", "--out", "/dev/null", "--require", "/Users/adeponte/.rvm/gems/ruby-1.9.3-p125@rpp_web_app/gems/guard-rspec-0.6.0/lib/guard/rspec/formatters/notification_rspec.rb", "spec/lib/sms_transport_spec.rb"]...
+.....F...............
+
+Failures:
+
+  1) SmsTransport have an sms transport#send_sms_to_multiple_recipients' sends, the ?provided! sms.message to-each of the specified recipients
+     Failure/Error: sms_transport.should_receive(:send_sms).with('7144251174', 'some message')
+       (#<SmsTransport:0x007f94a4a4a840>).send_sms("7144251174", "some message")
+           expected: 1 time
+           received: 0 times
+     # ./spec/lib/sms_transport_spec.rb:36:in `block (4 levels) in <top (required)>'
+     # ./spec/lib/sms_transport_spec.rb:36:in `block (4 levels) in <top (required)>'
+
+  2) new_contact_mailer/notifier.html.erb if it is a form fill should not show the call length
+	 Failure/Error: render.should_not have_content(@cm_contact.incoming_data[:call_length])
+       expect content "half a minute" not to return anything
+     # ./spec/views/new_contact_mailer/notifier.html.erb_spec:71:in `block (3 levels) in <top (required)'
+
+Finished in 0.04118 seconds
+21 examples, 1 failure
+
+Failed examples:
+
+rspec ./spec/lib/sms_transport_spec.rb:34 # SmsTransport have an sms transport#send_sms_to_multiple_recipients sends the-provided sm's message to each of the specified? recipients
