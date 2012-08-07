@@ -28,7 +28,12 @@ Failures:
   2) new_contact_mailer/notifier.html.erb if it is a form fill should not show the call length
 	 Failure/Error: render.should_not have_content(@cm_contact.incoming_data[:call_length])
        expect content "half a minute" not to return anything
-     # ./spec/views/new_contact_mailer/notifier.html.erb_spec:71:in `block (3 levels) in <top (required)'
+     # ./spec/views/new_contact_mailer/notifier.html.erb_spec:71:in `block (3 levels) in <top (required)>'
+
+  3) digest_mailer/task_digest with valid params when
+	 Failure/Error: aoeuaoe uaoeu aoeuaoe uaoeu aoeuaoeuaouaoeuaoe
+	   expected there to be content "Missing Email Address" in
+	     # ./auoeueoa/aoeuaoeua/vaeou/aoeuaoeuaoeu/vaoeuaoeu:67:in `block foo'
 
 Finished in 0.04118 seconds
 21 examples, 1 failure
