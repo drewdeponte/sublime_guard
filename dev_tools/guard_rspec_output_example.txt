@@ -49,6 +49,17 @@ rspec ./spec/lib/sms_transport_spec.rb:34 # SmsTransport have an sms transport#s
 rspec ./spec/lib/contact_notifier_spec.rb:61 # ContactNotfier#msg_options should set is_new_lead to false if is_new_lead => false is passed in options
 rspec ./spec/lib/contact_notifier_spec.rb:61 # ContactNotfier#msg_options should set sent_auto_response_message to true if it is a new lead, and the contact was sent an autoresponse message
 
+Running all specs
+.................................
+
+Finished in 0.04118 seconds
+21 examples, 0 failure
+
+Running: spec/models/mm_action_spec.rb
+.................................
+
+Finished in 0.47394 seconds
+33 examples, 0 failures
 
 Running: spec/helpers/application_helper_spec.rb
 Done.

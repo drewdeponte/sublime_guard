@@ -48,7 +48,7 @@
 		</dict>
 		<dict>
 			<key>begin</key>
-			<string>Running tests(\s+with\s+args\s+\[.*\]\.*\n)?</string>
+			<string>Running all specs|Running: .+|Running tests(\s+with\s+args\s+\[.*\]\.*\n)?</string>
 			<key>comment</key>
 			<string>dots painting</string>
 			<key>end</key>
