@@ -38,11 +38,12 @@ function load_rvm_as_a_function() {
 
 function run_guard() {
   cmd="guard"
+  cd "$1"
   if [[ -s "Gemfile" ]] ; then
     cmd="bundle exec guard"
   fi
   printf "Running '$cmd'. All output/failures from this point on is from the '$cmd' command.\n\n"
-  cd "$1" && $cmd
+  $cmd
 }
 
 echo "Starting Guard for $1"
