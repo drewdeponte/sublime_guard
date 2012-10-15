@@ -38,11 +38,16 @@ function load_rvm_as_a_function() {
 
 function run_guard() {
   cmd="guard"
-  if [[ -s "Gemfile" ]] ; then
-    cmd="bundle exec guard"
+  cd "$1"
+  if [[ $? -eq 0 ]] ; then
+    if [[ -s "Gemfile" ]] ; then
+      cmd="bundle exec guard"
+    fi
+    printf "Running '$cmd'. All output/failures from this point on is from the '$cmd' command.\n\n"
+    $cmd
+  else
+    printf "Failed to change into project root directory '$1', guard could not be started.\n\n"
   fi
-  printf "Running '$cmd'. All output/failures from this point on is from the '$cmd' command.\n\n"
-  cd "$1" && $cmd
 }
 
 echo "Starting Guard for $1"
