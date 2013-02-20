@@ -1,6 +1,9 @@
 import sublime
 import sublime_plugin
-import thread
+try:
+    import thread
+except ImportError:
+    import _thread as thread #  python3
 import subprocess
 import os
 import stat
@@ -37,7 +40,7 @@ class GuardController(object):
     def find_project_root_path(self):
         project_root_path = None
         for path in self.open_folder_paths():
-            print "Checking ... " + path
+            print ("Checking ... " + path)
             if (self.path_has_guardfile(path)):
                 project_root_path = path
                 break
