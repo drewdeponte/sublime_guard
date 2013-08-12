@@ -1,21 +1,3 @@
-Call for New Maintainer!!!
-==========================
-
-Sadly, I have been neglecting the maintenance of this project. This is a side
-effect of that fact that I am no longer using [Sublime Text
-2/3](http://www.sublimetext.com) as my primary editor. Therefore, I am no
-longer "Eating My Own Dog Food" with respect to using this plugin and in turn
-finding it very difficult to allocate time to work on it.
-
-### If you are interested in being the lead maintainer of this project please contact me via [Issue 71](http://github.com/cyphactor/sublime_guard/issues/71).
-
-I would love to see this project continue to evolve. Therofore, I am calling
-out requesting that anyone interested in becoming the primary maintainer of
-this project reach out to me at [Issue
-71](http://github.com/cyphactor/sublime_guard/issues/71).
-
-I would be happy to stay involved and provide guidance where I can.
-
 Sublime Text 2 Guard Plugin
 ===========================
 
