@@ -1,6 +1,11 @@
 import sublime
 import sublime_plugin
-import thread
+try:
+    import thread
+    st_version = 2
+except ImportError:
+    from threading import Thread
+    st_version = 3
 import subprocess
 import os
 import stat
@@ -19,7 +24,10 @@ class GuardController(object):
 
     def set_listener(self, listener):
         self.listener = listener
-        self.output_view = self.listener.window.get_output_panel('guard')
+        if st_version == 2:
+            self.output_view = self.listener.window.get_output_panel('guard')
+        else:
+            self.output_view = self.listener.window.create_output_panel('guard')
         self.enable_word_wrap()
         self.set_color_scheme()
         self.load_config()
@@ -37,7 +45,7 @@ class GuardController(object):
     def find_project_root_path(self):
         project_root_path = None
         for path in self.open_folder_paths():
-            print "Checking ... " + path
+            print ("Checking ... " + path)
             if (self.path_has_guardfile(path)):
                 project_root_path = path
                 break
@@ -72,9 +80,15 @@ class GuardController(object):
             self.running = True
             self.show_guard_view_and_enable_autoshow()
             if self.proc.stdout:
-                thread.start_new_thread(self.read_stdout, ())
+                if st_version == 2:
+                    thread.start_new_thread(self.read_stdout, ())
+                else:
+                    Thread(target=self.read_stdout, args=()).start()
             if self.proc.stderr:
-                thread.start_new_thread(self.read_stderr, ())
+                if st_version == 2:
+                    thread.start_new_thread(self.read_stderr, ())
+                else:
+                    Thread(target=self.read_stderr, args=()).start()
 
     def read_stdout(self):
         while True:
@@ -104,20 +118,24 @@ class GuardController(object):
         clean_data = self.remove_terminal_color_codes(clean_data)
 
         # actually append the data
-        self.output_view.set_read_only(False)
-        edit = self.output_view.begin_edit()
+        if st_version == 2:
+            self.output_view.set_read_only(False)
+            edit = self.output_view.begin_edit()
 
-        # clear the output window when a predefined text is found.
-        if (self.clear_when_find_this_text and self.clear_when_find_this_text.search(clean_data)):
-            self.output_view.erase(edit, sublime.Region(0, self.output_view.size()))
+            # clear the output window when a predefined text is found.
+            if (self.clear_when_find_this_text and self.clear_when_find_this_text.search(clean_data)):
+                self.output_view.erase(edit, sublime.Region(0, self.output_view.size()))
 
-        self.output_view.insert(edit, self.output_view.size(), clean_data)
+            self.output_view.insert(edit, self.output_view.size(), clean_data)
 
-        # scroll to the end of the new insert
-        self.scroll_to_end_of_guard_view()
+            # scroll to the end of the new insert
+            self.scroll_to_end_of_guard_view()
 
-        self.output_view.end_edit(edit)
-        self.output_view.set_read_only(True)
+            self.output_view.end_edit(edit)
+            self.output_view.set_read_only(True)
+        else:
+            self.output_view.run_command('guard_message', {'string': clean_data})
+            self.scroll_to_end_of_guard_view()
 
     def normalize_line_endings(self, data):
         return data.replace('\r\n', '\n').replace('\r', '\n')
@@ -142,7 +160,7 @@ class GuardController(object):
         self.listener.window.run_command('hide_panel', {'panel': 'output.guard'})
 
     def stop_guard(self):
-        self.proc.stdin.write('e\n')
+        self.proc.stdin.write(b'e\n')
         self.proc.stdin.flush()
         self.running = False
 
@@ -150,23 +168,23 @@ class GuardController(object):
         return self.running
 
     def reload_guard(self):
-        self.proc.stdin.write('r\n')
+        self.proc.stdin.write(b'r\n')
         self.proc.stdin.flush()
 
     def run_all_tests(self):
-        self.proc.stdin.write('\n')
+        self.proc.stdin.write(b'\n')
         self.proc.stdin.flush()
 
     def output_help(self):
-        self.proc.stdin.write('h\n')
+        self.proc.stdin.write(b'h\n')
         self.proc.stdin.flush()
 
     def toggle_notifications(self):
-        self.proc.stdin.write('n\n')
+        self.proc.stdin.write(b'n\n')
         self.proc.stdin.flush()
 
     def pause(self):
-        self.proc.stdin.write('p\n')
+        self.proc.stdin.write(b'p\n')
         self.proc.stdin.flush()
 
     def load_config(self):
@@ -276,3 +294,10 @@ class PauseGuardCommand(sublime_plugin.WindowCommand):
 
     def is_enabled(self):
         return GuardControllerSingleton().is_guard_running()
+
+class GuardMessageCommand(sublime_plugin.TextCommand):
+    """
+    A command to write a message to the Guard messaging buffer
+    """
+    def run(self, edit, string=''):
+        self.view.insert(edit, self.view.size(), string)
