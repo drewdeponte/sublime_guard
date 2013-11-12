@@ -59,9 +59,9 @@ if [ $? -ne 0 ]; then # failed to load rvm
   run_guard "$1"
 else # successfully loaded rvm
   printf "Found and Successfully loaded RVM as a function.\n"
-  if [ -e "$1/.rvmrc" ]; then # found project specific .rvmrc
-    printf "Found an .rvmrc in the project directory. Trying to load it...\n"
-   
+  if [ -e "$1/.rvmrc" ] || [ -e "$1/.ruby-version" ]; then # found project specific .rvmrc or .ruby-version
+    printf "Found an .rvmrc or .ruby-version in the project directory. Trying to load it...\n"
+
     cd "$1"
     rvm rvmrc load "$1"
     if [ $? -ne 0 ]; then # failed to load project specific .rvmrc
@@ -74,7 +74,7 @@ else # successfully loaded rvm
     fi
   else # failed to find project specific .rvmrc
     printf "Failed to find a project specific .rvmrc in $1.\n"
-    
+
     printf "Attempting to switch to default RVM enviornment.\n"
     rvm use default
     if [ $? -ne 0 ]; then # failed to switch to the users default gemset
