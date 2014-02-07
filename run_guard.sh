@@ -37,6 +37,11 @@ function load_rvm_as_a_function() {
 }
 
 function run_guard() {
+  if [[ -s ".sublime_guard_env" ]] ; then
+    # Use .sublime_guard_env to set environment variables
+    source .sublime_guard_env
+    printf "Successfully sourced .sublime_guard_env.\n"
+  fi
   cmd="guard"
   cd "$1"
   if [[ $? -eq 0 ]] ; then
